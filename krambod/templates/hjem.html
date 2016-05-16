@@ -1,0 +1,17 @@
+{% extends "index.html" %}
+{% load staticfiles %}
+
+{% block set_page %}
+	var activeId = "link-hjem";
+{% endblock %}
+
+{% block main %}
+	<h1>Nyheiter!</h1>
+	{% for article in articles %}
+		<article>
+			<h2>{{article.title}}</h2>
+			<p class="article-last-changed">{{article.last_changed}}</p>
+			<p>{{article.content}}</p>
+		</article>
+	{% endfor %}
+{% endblock %}

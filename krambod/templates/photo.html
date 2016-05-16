@@ -1,0 +1,13 @@
+{% extends "index.html" %}
+{% load staticfiles %}
+
+{% block main %}
+	<h1>Informasjon!</h1>
+	{% for article in articles %}
+		<article>
+			<h2>{{article.title}}</h2>
+			<p class="article-last-changed">{{article.last_changed}}</p>
+			<p>{{article.content}}</p>
+		</article>
+	{% endfor %}
+{% endblock %}

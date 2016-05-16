@@ -1,0 +1,51 @@
+{% load staticfiles %}
+
+<html>
+
+<head>
+	<meta charset="utf-8" />
+	<link rel="stylesheet" href="{% static "krambod/css/style.css" %}">
+</head>
+
+<body>
+	<div>
+		<header class="header wrapper shadow">
+			<div class="logo">
+				<img src="{% static "krambod/img/krampuohi_sivu_pohja.png" %}" alt="logo"></img>
+			</div>
+			<div class="mainmenu">
+				<ul>
+ 					<li><a id="link-hjem" href="{% url "hjem" %}">Hjem</a></li>
+					<li><a id="link-informasjon" href="{% url "informasjon" %}">Informasjon</a></li>
+					<li><a id="link-bilder" href="{% url "photos" %}">Bilder</a></li>
+					<li><a id="link-butikk" href="http://www.kvenskinstitutt.no/virksomhet/mean-krampuohi-butikk/">Butikk</a></li>
+					<li><a id="link-signinn" href="{% url "admin:index" %}">Logg Inn</a></li>
+				</ul>
+			</div>
+			<script>
+				{% block set_page %}{% endblock %}
+				var link = document.getElementById(activeId);
+				var classString = link.className;
+				classString = classString.concat(" active");
+				link.className = classString;
+			</script>
+
+			<div class="headerimage">
+				<img src="{% static "krambod/img/krampuoh-banner.jpg" %}" alt="banner" style="width: 956px; height: 230px;"></img>
+			</div>
+		</header>
+
+		<div class="wrapper">
+			<div class="content-wrap">
+				<div class="sidebar shadow">
+					<p>test</p>
+				</div>
+				<div class="maininfo shadow">
+					{% block main %}{% endblock %}
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+
+</html>
