@@ -57,3 +57,6 @@ Include/
 
 #python bytecode
 *.pyc
+
+#development/test databases
+*.sqlite3?
