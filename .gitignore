@@ -59,7 +59,8 @@ Include/
 *.pyc
 
 #development/test databases
-*.sqlite?
+*.sqlite
+*.sqlite3
 
 #static dir 
 static/
