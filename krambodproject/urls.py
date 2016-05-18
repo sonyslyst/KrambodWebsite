@@ -16,10 +16,13 @@ Including another URLconf
 from django.conf.urls import url, include
 from django.contrib import admin
 from krambod.views import HomePageView, InfoPageView, PhotoPageView
+from krambodproject import settings
 
 urlpatterns = [
 	url(r'^$', HomePageView.as_view(), name = "hjem"),
 	url(r'^informasjon/$', InfoPageView.as_view(), name = "informasjon"),
 	url(r'^photos/$', PhotoPageView.as_view(), name = "photos"),
     url(r'^admin/', include(admin.site.urls), name = "admin"),
+    url(r'^ckeditor/', include('ckeditor_uploader.urls')),
+    url(r'^media/(?P<path>.*)$', 'django.views.static.serve',{'document_root': settings.MEDIA_ROOT}),
 ]
