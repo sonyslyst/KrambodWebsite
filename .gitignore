@@ -45,3 +45,22 @@ $RECYCLE.BIN/
 Network Trash Folder
 Temporary Items
 .apdisk
+
+#virtualenv
+Scripts/
+Lib/
+Include/
+
+#swap files
+*.swp
+*.swo
+
+#python bytecode
+*.pyc
+
+#development/test databases
+*.sqlite
+*.sqlite3
+
+#static dir 
+static/
