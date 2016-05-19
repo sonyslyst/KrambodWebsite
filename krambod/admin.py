@@ -1,8 +1,8 @@
 from django.contrib import admin
 from krambod.models import Article
-from krambod.models import Informasjon
+from krambod.models import Information
 
 # Register your models here.
 
 admin.site.register(Article)
-admin.site.register(Informasjon)
+admin.site.register(Information)

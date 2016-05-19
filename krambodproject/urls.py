@@ -20,7 +20,7 @@ from krambodproject import settings
 
 urlpatterns = [
 	url(r'^$', HomePageView.as_view(), name = "hjem"),
-	url(r'^informasjon/$', InfoPageView.as_view(), name = "informasjon"),
+	url(r'^information/$', InfoPageView.as_view(), name = "information"),
 	url(r'^photos/$', PhotoPageView.as_view(), name = "photos"),
     url(r'^admin/', include(admin.site.urls), name = "admin"),
     url(r'^ckeditor/', include('ckeditor_uploader.urls')),
