@@ -11,9 +11,9 @@ class Article(models.Model):
 	title = models.CharField(max_length=160)
 	content = RichTextUploadingField()
 	
-class Informasjon(models.Model):
+class Information(models.Model):
 	created = models.DateTimeField(auto_now_add=True)
 	last_changed = models.DateTimeField(auto_now=True)
 	title = models.CharField(max_length=160)
-	content = models.CharField(max_length=1024)
+	content = RichTextUploadingField()
 	

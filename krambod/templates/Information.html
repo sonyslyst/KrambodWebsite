@@ -2,14 +2,14 @@
 {% load staticfiles %}
 
 {% block set_page %}
-var activeId = 'link-informasjon';
+var activeId = 'link-information';
 {% endblock %}
 
 {% block main %}
 	<h1>Informasjon!</h1>
 		<article>
 			<h2>{{information.title}}</h2>
-			<p class="article-last-changed">{{article.last_changed}}</p>
+			<p class="information-last-changed">{{information.last_changed}}</p>
 			<p>{{information.content}}</p>
 		</article>
 {% endblock %}
