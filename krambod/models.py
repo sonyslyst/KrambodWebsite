@@ -34,9 +34,13 @@ class PhotoTag(models.Model):
 class Photo(models.Model):
 	image = models.ImageField(upload_to='gallery/')
 	image_thumbnail = ImageSpecField(source='image',
-									processors=[ResizeToFill(100, 50)],
+									processors=[ResizeToFill(100, 100)],
 									format='JPEG',
 									options={'quality': 60})
+	image_show = ImageSpecField(source='image',
+								processors=[ResizeToFill(800, 800)],
+								format='JPEG',
+								options={'quality': 60})
 	tags = models.ManyToManyField(PhotoTag)
 
 	def __str__(self):
