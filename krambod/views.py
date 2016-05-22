@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.views.generic.base import TemplateView
 
-from krambod.models import Article, Information
+from krambod.models import Article, Information, Photo, PhotoTag
 
 class HomePageView(TemplateView):
 	template_name = 'hjem.html'
@@ -19,6 +19,11 @@ class InfoPageView(TemplateView):
 		context['information'] = Information.objects.all()[0]
 		return context
 		
-	
 class PhotoPageView(TemplateView):
-	template_name = 'photos.html'
+	template_name = 'photo.html'
+
+	def get_context_data(self, **kwargs):
+		context = super(PhotoPageView, self).get_context_data(**kwargs)
+		context['photos'] = Photo.objects.all()
+		context['tags'] = PhotoTag.objects.all()
+		return context

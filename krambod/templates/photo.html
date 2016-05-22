@@ -1,13 +1,29 @@
 {% extends "index.html" %}
 {% load staticfiles %}
 
+{% block set_page %}
+var activeId = 'link-bilder';
+{% endblock %}
+
+{% block sidebar %}
+	<ul class="taglist">
+	{% for tag in tags %}
+		<li class="taglist-tag" >
+			<a href="#"> {{ tag.name }} </a>
+		</li>
+	{% endfor %}
+	</ul>
+{% endblock %}
+
 {% block main %}
 	<h1>Photos!</h1>
-	{% for article in articles %}
-		<article>
-			<h2>{{article.title}}</h2>
-			<p class="article-last-changed">{{article.last_changed}}</p>
-			<p>{{article.content}}</p>
-		</article>
+	<div class="photo-grid" >
+	{% for photo in photos %}
+		<div class="photo-thumbnail" >
+			<a href="#">
+				<img src="{{ photo.image_thumbnail.url }}" />
+			</a>
+		</div>
 	{% endfor %}
+	</div>
 {% endblock %}

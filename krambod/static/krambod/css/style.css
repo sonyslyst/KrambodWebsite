@@ -109,3 +109,22 @@ html {
 	font-style: italic;
 	font-size: 0.8em;
 }
+
+.photo-grid {
+  display: flex;
+  flex-direction: row;
+}
+
+.photo-thumbnail {
+  border: 1px solid black;
+  margin-right: 1em;
+}
+
+.taglist {
+  list-decoration: none;
+}
+
+.taglist-tag {
+  float: none;
+  text-align: left;
+}
