@@ -9,7 +9,7 @@ var activeId = 'link-bilder';
 	<ul class="taglist">
 	{% for tag in tags %}
 		<li class="taglist-tag" >
-			<a href="#"> {{ tag.name }} </a>
+			<a href="{% url 'photos' %}?tag={{ tag.name }}"> {{ tag.name }} </a>
 		</li>
 	{% endfor %}
 	</ul>
