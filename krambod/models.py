@@ -26,7 +26,7 @@ class Information(models.Model):
 		return "{}: {}".format(self.last_changed, self.title)
 	
 class PhotoTag(models.Model):
-	name = models.CharField(max_length=40)
+	name = models.CharField(max_length=40, unique = True)
 
 	def __str__(self):
 		return self.name
