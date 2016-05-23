@@ -6,24 +6,50 @@ var activeId = 'link-bilder';
 {% endblock %}
 
 {% block sidebar %}
-	<ul class="taglist">
-	{% for tag in tags %}
-		<li class="taglist-tag" >
-			<a href="{% url 'photos' %}?tag={{ tag.name }}"> {{ tag.name }} </a>
-		</li>
-	{% endfor %}
-	</ul>
+    <h3><a href="{% url 'photos' %}">Vis alle</a></h3>
+    <h3>Filtrer på tag</h3>
+    <ul class="taglist">
+    {% for tag in tags %}
+        <li class="taglist-tag" >
+            <a href="{% url 'photos' %}?tag={{ tag.name }}"> {{ tag.name }} </a>
+        </li>
+    {% endfor %}
+    </ul>
 {% endblock %}
 
 {% block main %}
-	<h1>Photos!</h1>
-	<div class="photo-grid" >
-	{% for photo in photos %}
+    {% if tag %}
+        <h1>Bilder tagget med {{ tag }}</h1>
+    {% else %}
+        <h1>Alle bilder</h1>
+    {% endif %}
+    <div class="photo-grid" >
+    {% for photo in photos %}
+	<a href="{% url 'photos' %}?{% if tag %}tag={{ tag }}&{% endif %}show={{ photo.id }}">
 		<div class="photo-thumbnail" >
-			<a href="#">
-				<img src="{{ photo.image_thumbnail.url }}" />
-			</a>
+			<img src="{{ photo.image_thumbnail.url }}" />
 		</div>
-	{% endfor %}
+	</a>
+    {% endfor %}
+    </div>
+{% endblock %}
+
+{% block end_of_body %}
+	{% if show_photo %}
+	<div class="photo-overlay">
+		<div class="photo-overlay-row">
+			<div class="photo-overlay-buttons-container">
+				<span></span>
+				<a class="photo-overlay-buttons" href="{{ previous_url }}"><span class="icon-arrow-left"></span></a>
+			</div>
+			<div class="photo-overlay-inner">
+				<img src="{{ show_photo.image_show.url }}" />
+			</div>
+			<div class="photo-overlay-buttons-container">
+				<a class="photo-overlay-buttons" href="{% url 'photos' %}{% if tag %}?tag={{ tag }}{% endif %}"><span class="icon-cross"></span></a>
+				<a class="photo-overlay-buttons" href="{{ next_url }}"><span class="icon-arrow-right"></span></a>
+			</div>
+		</div>
 	</div>
+	{% endif %}
 {% endblock %}

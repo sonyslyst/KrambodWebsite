@@ -1,7 +1,17 @@
+from django.core.urlresolvers import reverse
 from django.shortcuts import render
 from django.views.generic.base import TemplateView
 
 from krambod.models import Article, Information, Photo, PhotoTag
+
+def getPrevNext(photos, current, tag):
+    makeUrl = lambda ph: (reverse('photos') + (("?tag=" + str(tag) + "&") if tag else "?") + "show=" + str(ph.pk)) if ph else "#"
+    i = iter(photos)
+    prevPhoto = None;
+    for photo in i:
+        if photo.pk == current.pk:
+            return makeUrl(prevPhoto), makeUrl(next(i, None))
+        prevPhoto = photo
 
 class KrambodViewMixin(object):
     def get(self, request, *args, **kwargs):
@@ -32,6 +42,7 @@ class PhotoPageView(TemplateView, KrambodViewMixin):
         context = super(PhotoPageView, self).get_context_data(**kwargs)
 
         filterByTag = self.request.GET.get('tag', None)
+        context['tag'] = filterByTag
         tag = None
         try: 
             tag = PhotoTag.objects.get(name = filterByTag)
@@ -39,5 +50,16 @@ class PhotoPageView(TemplateView, KrambodViewMixin):
             context['photos'] = Photo.objects.all()
         else:
             context['photos'] = Photo.objects.filter(tags = tag)
+
+        showPhoto = self.request.GET.get('show', None)
+        photo = None
+        try: 
+            photo = Photo.objects.get(pk = showPhoto)
+        except:
+            pass
+        else:
+            context['show_photo'] = photo
+            context['previous_url'], context['next_url'] = getPrevNext(context['photos'], photo, tag)
+
         context['tags'] = PhotoTag.objects.all()
         return context

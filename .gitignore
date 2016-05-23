@@ -63,4 +63,4 @@ Include/
 *.sqlite3
 
 #static dir 
-static/
+/static/
