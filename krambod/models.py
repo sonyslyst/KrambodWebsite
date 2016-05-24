@@ -3,7 +3,7 @@ from __future__ import unicode_literals
 from django.db import models
 from ckeditor_uploader.fields import RichTextUploadingField
 from imagekit.models import ImageSpecField
-from imagekit.processors import ResizeToFill
+from imagekit.processors import ResizeToFit
 
 # Create your models here.
 
@@ -26,7 +26,7 @@ class Information(models.Model):
 		return "{}: {}".format(self.last_changed, self.title)
 	
 class PhotoTag(models.Model):
-	name = models.CharField(max_length=40)
+	name = models.CharField(max_length=40, unique = True)
 
 	def __str__(self):
 		return self.name
@@ -34,11 +34,11 @@ class PhotoTag(models.Model):
 class Photo(models.Model):
 	image = models.ImageField(upload_to='gallery/')
 	image_thumbnail = ImageSpecField(source='image',
-									processors=[ResizeToFill(100, 100)],
+									processors=[ResizeToFit(100, 100)],
 									format='JPEG',
 									options={'quality': 60})
 	image_show = ImageSpecField(source='image',
-								processors=[ResizeToFill(800, 800)],
+								processors=[ResizeToFit(1024, 800)],
 								format='JPEG',
 								options={'quality': 60})
 	tags = models.ManyToManyField(PhotoTag)
